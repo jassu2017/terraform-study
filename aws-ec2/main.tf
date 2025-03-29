@@ -82,6 +82,7 @@ resource "aws_instance" "my-trfm-aws-ec2" {
     associate_public_ip_address = true
     key_name = "demo-vpc-flow"
     vpc_security_group_ids = [aws_security_group.my-trfm-aws-sg.id] 
+    user_data = filebase64("${path.module}/install_minikube.sh")
 }
 
 resource "aws_security_group" "my-trfm-aws-sg" {
