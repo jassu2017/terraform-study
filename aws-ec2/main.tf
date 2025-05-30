@@ -83,6 +83,10 @@ resource "aws_instance" "my-trfm-aws-ec2" {
     key_name = "demo-vpc-flow"
     vpc_security_group_ids = [aws_security_group.my-trfm-aws-sg.id] 
     user_data = filebase64("${path.module}/install_minikube.sh")
+
+    tags = {
+      Name = "my-trfm-ec2-k8s"
+    }
 }
 
 resource "aws_security_group" "my-trfm-aws-sg" {
