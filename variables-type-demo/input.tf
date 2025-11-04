@@ -15,6 +15,11 @@ variable "aws_ami" {
 variable "aws_instance_type" {
   description = "value of instance type"
   type = string
+// added the validation
+  validation {
+    condition = var.aws_instance_type == "t2.micro" || var.aws_instance_type == "t2.nano"
+    error_message = "The instance must be t2.micro or t2.nano"
+  }
   
   
 }
