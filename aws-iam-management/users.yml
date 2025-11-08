@@ -77,7 +77,7 @@ security:
 groups:
     developers:
         policies:
-        - AWSCodeCommitreadOnly
+        - AWSCodeCommitReadOnly
         - AmazonS3ReadOnlyAccess
         - AWSCloudFormationReadOnlyAccess
         
@@ -96,7 +96,7 @@ groups:
     security_admins:
         policies:
         - AmazonRDSFullAccess
-        - AmazonRedShiftFullAccess
+        - AmazonRedshiftFullAccess
         - AWSBackupFullAccess
         
 password_policy:
@@ -106,4 +106,4 @@ password_policy:
     require_numbers: true
     require_symbols: true
     max_age_days: 90
-    prevent_resuse: 24
+    prevent_reuse: 24
