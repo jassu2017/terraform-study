@@ -1,0 +1,109 @@
+developers:
+- username: dev.john
+  full_name: "John Smith"
+  groups:
+    - developers
+  permissions:
+    - AWSCodeCommitPowerUser
+    - AWSCodeBuildDeveloperAccess
+    - AWSCodePipelineApproverAccess
+    - AWSLambdaExecute
+    - IAMUserChangePassword
+    
+- username: dev.sarah
+  full_name: "Sarah Johnson"
+  groups:
+    - developers
+    - senior_developers
+  permissions:
+    - AWSCodeCommitPowerUser
+    - AWSCodeBuildDeveloperAccess
+    - AWSCodePipelineApproverAccess
+    - AWSLambda_FullAccess
+    - IAMUserChangePassword
+
+operations:
+- username: ops.mike
+  full_name: "Mike Anderson"
+  groups:
+    - operations
+  permissions:
+    - AmazonEC2FullAccess
+    - AmazonRDSFullAccess
+    - CloudWatchFullAccess
+    - AWSCloudFormationFullAccess
+    - IAMUserChangePassword
+    
+- username: ops.lisa
+  full_name: "Lisa Chen"
+  groups:
+    - operations
+    - security_admins
+  permissions:
+    - AmazonEC2FullAccess
+    - AmazonRDSFullAccess
+    - CloudWatchFullAccess
+    - IAMAccessAnalyzerFullAccess
+    - IAMUserChangePassword
+ 
+#db team 
+db_admins:
+- username: dba.robert
+  full_name: "Robert Wilson"
+  groups: 
+    - db_admins
+  permissions:
+    - AmazonRDSFullAccess
+    - AmazonDynamoDBFullAccess
+    - AWSBackupFullAccess
+    - IAMUserChangePassword
+ 
+#security Team 
+security:
+- username: sec.alice
+  full_name: "Alice Brown"
+  groups: 
+    - security_admins
+  permissions:
+    - IAMFullAccess
+    - SecurityAudit
+    - AWSSecurityHubFullAccess
+    - AWSConfigUserAccess
+    - IAMUserChangePassword
+    
+    
+#Groups Configuration
+
+groups:
+    developers:
+        policies:
+        - AWSCodeCommitreadOnly
+        - AmazonS3ReadOnlyAccess
+        - AWSCloudFormationReadOnlyAccess
+        
+    senior_developers:
+        policies:
+        - AWSCodeCommitPowerUser
+        - AmazonS3TablesFullAccess
+        - AWSCloudFormationReadOnlyAccess
+        
+    operations:
+        policies:
+        - AWSSystemsManagerForSAPFullAccess
+        - AmazonVPCFullAccess
+        - AWSCloudTrail_ReadOnlyAccess
+        
+    security_admins:
+        policies:
+        - AmazonRDSFullAccess
+        - AmazonRedShiftFullAccess
+        - AWSBackupFullAccess
+        
+password_policy:
+    minimum_length: 8
+    require_uppercase: true
+    require_lowercase: true
+    require_numbers: true
+    require_symbols: true
+    max_age_days: 90
+    prevent_resuse: 24
