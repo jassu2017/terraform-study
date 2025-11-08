@@ -107,6 +107,8 @@ resource "aws_iam_access_key" "user_key" {
   for_each = local.all_users_name
   user     = each.key
 
+depends_on = [ aws_iam_user.users ]
+
 }
 
 //setup console access ofr users with initial pwd  req
@@ -116,6 +118,8 @@ resource "aws_iam_user_login_profile" "user_login_profile" {
   user                    = each.key
   password_length         = 20
   password_reset_required = true
+
+depends_on = [ aws_iam_user.users ]
 
 }
 
@@ -141,6 +145,8 @@ resource "aws_iam_group" "groups" {
   for_each = local.all_group_names
   name     = each.value
 
+depends_on = [ aws_iam_user.users ]
+
 }
 
 //assign users to their respective iam groups
@@ -150,6 +156,8 @@ resource "aws_iam_user_group_membership" "pairing_user_groups" {
   user     = each.value.username
   groups   = [each.value.group]
 
+depends_on = [ aws_iam_group.groups ]
+
 }
 
 //attach aws_iam managed policies to aws group
@@ -158,6 +166,8 @@ resource "aws_iam_group_policy_attachment" "group_policy_attachment" {
   for_each   = local.pair_group_policy
   group      = each.value.group_name
   policy_arn = "arn:aws:iam::aws:policy/${each.value.group_obj}"
+
+depends_on = [ aws_iam_user_policy_attachment.user_policy_attachment ]
 
 }
 
@@ -169,6 +179,8 @@ resource "aws_iam_user_policy_attachment" "user_policy_attachment" {
 
   user       = each.value.username
   policy_arn = "arn:aws:iam::aws:policy/${each.value.permission}"
+
+depends_on = [ aws_iam_user.users ]
 
 }
 
