@@ -30,9 +30,12 @@ module "security-group" {
 
   name = "module-sample-sg"
   vpc_id = module.vpc.vpc_id
+  ingress_cidr_blocks = ["10.10.0.0/16"]
 
-  ingress_rules = [ "ssh-tcp" ]
-  egress_rules = [ "all-all" ]
 
-  
-}
+  ingress_rules = ["ssh-tcp"]
+  egress_rules = ["all-all"]
+
+  depends_on = [ module.vpc ]
+
+} 

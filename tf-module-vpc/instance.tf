@@ -12,6 +12,8 @@ module "ec2-instance" {
   subnet_id              = module.vpc.public_subnets[0]
   associate_public_ip_address = true
 
+  depends_on = [ module.security-group ]
+
 
 
   tags = {
